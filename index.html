@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Compie Test</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- Styles -->
+    <link rel="stylesheet" type="text/css" media="screen" href="node_modules/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" type="text/css" media="screen" href="style/main.css" />
+
+    <!-- Scripts -->
+    <script src="resources/data.js"></script>
+    <script src="node_modules/jquery/dist/jquery.min.js"></script>
+    <script src="node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
+    <script src="node_modules/angular/angular.js"></script>
+
+</head>
+
+<body ng-app="main" ng-controller="main-control">
+    <h1>My Location App</h1>
+    <div class="main-controll input-group mb-3">
+        <div class="input-group-prepend">
+            <span class="input-group-text" id="basic-addon1">My Location:</span>
+        </div>
+        <input id="autocomplete" class="form-control" placeholder="Enter your address" onFocus="geolocate()" type="text" ng-model="mylocation"
+        />
+        <div class="input-group-append">
+            <button class="btn btn-primary" type="button" ng-click="displayBranchesResults()">Send My location</button>
+        </div>
+    </div>
+
+    <!-- ############## -->
+    <!-- Best result    -->
+    <!-- ############## -->
+    <div ng-show="results.length > 0" class="winner">
+        <h5>Best Branch is: {{winner.name}} with {{winner.counter}} occurances in 3 Km perimeter</h5>
+    </div>
+
+
+    <!-- ################ -->
+    <!-- Table of results -->
+    <!-- ################ -->
+    <table ng-show="results.length > 0" class="table table-striped main-results">
+        <thead>
+            <tr>
+                <td>#</td>
+                <td>Company</td>
+                <td>location</td>
+                <td>distance (Km)</td>
+            </tr>
+        </thead>
+        <tbody>
+            <tr ng-repeat="result in results | orderBy : 'distance'" ng-class="{'font-weight-bold': 5 > result.distance}">
+                <td>{{$index + 1}}</td>
+                <td>{{result.name}}</td>
+                <td>{{result.location}}</td>
+                <td>{{result.distance}}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <script src="main-controller.js"></script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBpyEqJqLkmzO-z4rvLpide51lqGRskES4&libraries=places&callback=initAutocomplete"
+        async defer></script>
+</body>
+
+</html>

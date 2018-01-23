@@ -1,0 +1,18 @@
+h1{
+    text-align: center;
+}
+
+.main-controll{
+    max-width: 700px;
+    margin: auto;
+}
+
+.main-results{
+    max-width: 700px;
+    margin: auto;
+}
+
+.winner{
+    text-align: center;
+    margin: auto;
+}
